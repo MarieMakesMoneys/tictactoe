@@ -10,8 +10,10 @@ const gameBoard = (function() {
         let cells = document.querySelectorAll('div.cell')
         cells.forEach((cell) => {
             let arrayIndex = cell.getAttribute('data-array-index')
-            console.log(arrayIndex)
             cell.textContent = gameboard[arrayIndex]
+            if (cell.textContent === 'x') {
+                cell.classList.add('cross')
+            }
         })
     }
 
