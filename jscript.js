@@ -1,26 +1,40 @@
 const Player = (playerName, playerLogo) => {
     //let //blabla
-    //return //blabla
+    return {playerName, playerLogo}
 }
 
-const gameBoard = (function() {
-    let gameboard = ['x', 'x', 'x', 'o', 'x', , 'o', 'o', 'o']
+const user = Player('user', 'x')
+const computer = Player('computer', 'o')
 
-    function displayGameboard() {
-        let cells = document.querySelectorAll('div.cell')
+const gameBoard = (function() {
+    let gameboard = [, , , , , , , , ]
+
+    let player = user
+
+    function playTTT() {
+        const cells = document.querySelectorAll('.cell')
         cells.forEach((cell) => {
-            let arrayIndex = cell.getAttribute('data-array-index')
-            cell.textContent = gameboard[arrayIndex]
-            if (cell.textContent === 'x') {
-                cell.classList.add('cross')
-            }
+            cell.addEventListener('click', () => {
+                let arrayIndex = cell.getAttribute('data-array-index')
+                if (player === user) {
+                    gameboard[arrayIndex] = 'x'
+                    player = computer
+                } else if (player === computer) {
+                    gameboard[arrayIndex] = 'o'
+                    player = user
+                }
+                cell.textContent = gameboard[arrayIndex]
+                if (cell.textContent === 'x') {
+                    cell.classList.add('cross')
+                } 
+            })
         })
     }
 
-    return {gameboard, displayGameboard}
+    return {gameboard, playTTT}
 })()
 
-gameBoard.displayGameboard()
+gameBoard.playTTT()
 
 const displayController = (function() {
     //let //blabla
